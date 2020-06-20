@@ -1,0 +1,54 @@
+sqlConfig: &sqlConfig
+    code: sqldb
+    driverName: mysql
+    urlAddress: "root:@tcp(localhost:4333)/service_config?charset=utf8"
+    dbName:
+    tx:  false
+sqlConfigTx: &sqlConfigTx
+    code: sqldb
+    driverName: mysql
+    urlAddress: "root:@tcp(localhost:4333)/service_config?charset=utf8"
+    dbName:
+    tx: true
+couchdbConfig: &couchdbConfig
+    code: couch
+    driverName: couch
+    urlAddress: http://admin:admin@localhost:5984
+    dbName: service_config
+    tx: false
+cacheGrpcConfig: &cacheGrpcConfig
+    code: cacheGrpc
+    driverName: tcp
+    urlAddress: localhost:5051
+userGrpcConfig: &userGrpcConfig
+    code: userGrpc
+    driverName: tcp
+    urlAddress: localhost:5052
+zapConfig: &zapConfig
+    code: zap
+    level: debug
+    enableCaller: true
+logrusConfig: &logrusConfig
+    code: logrus
+    level: debug
+    enableCaller: false
+logConfig: *zapConfig
+useCaseConfig:
+    registration:
+        code: registration
+        userDataConfig: &userDataConfig
+            code: userData
+            dataStoreConfig: *sqlConfig
+    listUser:
+        code: listUser
+        userDataConfig: *userDataConfig
+        cacheDataConfig: &cacheDataConfig
+            code: cacheData
+            dataStoreConfig: *cacheGrpcConfig
+    registrationTx:
+        code: registrationTx
+        userDataConfig: &userDataConfigTx
+            code: userData
+            dataStoreConfig: *sqlConfigTx
+
+
