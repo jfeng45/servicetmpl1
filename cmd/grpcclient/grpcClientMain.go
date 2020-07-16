@@ -17,7 +17,7 @@ func callRegisterUser(usc uspb.UserServiceClient) {
 	ctx := context.Background()
 
 	created := ptypes.TimestampNow()
-	u := uspb.User{Name: "Tonys", Department: "IT", Created: created}
+	u := uspb.User{Name: "Tony", Department: "IT", Created: created}
 
 	resp, err := usc.RegisterUser(ctx, &uspb.RegisterUserReq{User: &u})
 
@@ -46,6 +46,6 @@ func main() {
 	userServiceClient := uspb.NewUserServiceClient(conn)
 	fmt.Println("client strated")
 
-	// callRegisterUser(userServiceClient)
+	callRegisterUser(userServiceClient)
 	callListUser(userServiceClient)
 }
