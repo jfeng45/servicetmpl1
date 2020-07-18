@@ -2,6 +2,7 @@ package datastorefactory
 
 import (
 	"database/sql"
+
 	databaseConfig "github.com/jfeng45/gtransaction/config"
 	"github.com/jfeng45/gtransaction/factory"
 	"github.com/jfeng45/gtransaction/gdbc"
@@ -21,10 +22,9 @@ func (sf *sqlFactory) Build(c container.Container, dsc *config.DataStoreConfig) 
 	//if it is already in container, return
 	if value, found := c.Get(key); found {
 		logger.Log.Debug("found db in container for key:", key)
-		sdb := value.(*sql.DB)
-		return buildGdbc(sdb, dsc.Tx)
+		return value, nil
 	}
-	tdbc :=databaseConfig.DatabaseConfig{dsc.DriverName, dsc.UrlAddress, dsc.Tx}
+	tdbc := databaseConfig.DatabaseConfig{dsc.DriverName, dsc.UrlAddress, dsc.Tx}
 	db, err := factory.BuildSqlDB(&tdbc)
 	if err != nil {
 		return nil, err
@@ -38,7 +38,7 @@ func (sf *sqlFactory) Build(c container.Container, dsc *config.DataStoreConfig) 
 
 }
 
-func buildGdbc(sdb *sql.DB,tx bool) (gdbc.SqlGdbc, error){
+func buildGdbc(sdb *sql.DB, tx bool) (gdbc.SqlGdbc, error) {
 	var sdt gdbc.SqlGdbc
 	if tx {
 		tx, err := sdb.Begin()

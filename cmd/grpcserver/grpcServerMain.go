@@ -3,6 +3,8 @@ package main
 import (
 	"context"
 	"fmt"
+	"net"
+
 	"github.com/jfeng45/servicetmpl1/app"
 	"github.com/jfeng45/servicetmpl1/app/container/containerhelper"
 	"github.com/jfeng45/servicetmpl1/app/container/servicecontainer"
@@ -11,12 +13,11 @@ import (
 	uspb "github.com/jfeng45/servicetmpl1/applicationservice/userclient/generatedclient"
 	"github.com/pkg/errors"
 	"google.golang.org/grpc"
-	"net"
 )
 
 const (
-	DEV_CONFIG  string = "../../../app/config/appConfigDev.yaml"
-	PROD_CONFIG string = "../../../app/config/appConfigProd.yaml"
+	DEV_CONFIG  string = "../../app/config/appConfigDev.yaml"
+	PROD_CONFIG string = "../../app/config/appConfigProd.yaml"
 )
 
 type UserService struct {
@@ -136,4 +137,3 @@ func buildContainer(filename string) (*servicecontainer.ServiceContainer, error)
 	}
 	return sc, nil
 }
-
