@@ -7,13 +7,12 @@ This is a major upgrade version of [jfeng45/servicetmpl](https://github.com/jfen
 
 The followings are a series of articles to explain the different areas of the application design:
 
-[A Self-Evolved Microservice Framework in Go]
++ [Go Microservice with Clean Architecture-A Major Upgrade](
+https://medium.com/@jfeng45/go-microservice-with-clean-architecture-a-major-upgrade-34a4cedb0b06)
++ [A Self-Evolved Microservice Framework in Go](https://medium.com/@jfeng45/a-self-evolved-microservice-framework-in-go-d9bf87c10ab0)
++ [A Non-Intrusive Transaction Management Lib in Go — How to Use It](https://medium.com/swlh/a-non-intrusive-transaction-management-lib-in-go-how-to-use-it-a3e751cc1dd4)
++ [A Non-Intrusive Transaction Management Lib in Go — How it Works?](https://medium.com/nerd-for-tech/a-non-intrusive-transaction-management-lib-in-go-how-it-works-51d4b2ede8af)
 
-[A Non-Intrusive Transaction Management Lib in Go--How to Use It]
-
-[A Non-Intrusive Transaction Management Lib in Go--How it Works?]
-
-[Go Microservice with Clean Architecture--A Major Upgrade]
 
 ## Getting Started
 

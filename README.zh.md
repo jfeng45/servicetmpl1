@@ -4,9 +4,7 @@
 
 ### **[English](README.md)**
 
-这是一个基于gRPC的Go微服务项目。它为Go微服务程序找到了合适的程序结构，并且应用了清晰架构（Clean Architecture）设计并使用依赖注入（Dependency Injection）将具体类型注入到每个函数中。
-
-这是对[jfeng45/servicetmpl](https://github.com/jfeng45/servicetmpl1)的一个重大升级版。
+这是一个Go微服务框架。它是对[jfeng45/servicetmpl](https://github.com/jfeng45/servicetmpl1)的一个重大升级版。
 
 下面是描述它的系列文章:
 
