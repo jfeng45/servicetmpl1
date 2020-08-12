@@ -19,12 +19,14 @@ type sqlFactory struct{}
 func (sf *sqlFactory) Build(c container.Container, dsc *config.DataStoreConfig) (DataStoreInterface, error) {
 	logger.Log.Debug("sqlFactory")
 	key := dsc.Code
-	//if it is already in container, return
-	if value, found := c.Get(key); found {
-		logger.Log.Debug("found db in container for key:", key)
-		return value, nil
+	// Only non-transaction connection is cached
+	if !dsc.Tx  {
+		if value, found := c.Get(key); found {
+			logger.Log.Debug("found db in container for key:", key)
+			return value, nil
+		}
 	}
-	tdbc := databaseConfig.DatabaseConfig{dsc.DriverName, dsc.UrlAddress, dsc.Tx}
+	tdbc := databaseConfig.DatabaseConfig{dsc.DriverName,dsc.UrlAddress, dsc.Tx}
 	db, err := factory.BuildSqlDB(&tdbc)
 	if err != nil {
 		return nil, err
@@ -33,7 +35,10 @@ func (sf *sqlFactory) Build(c container.Container, dsc *config.DataStoreConfig) 
 	if err != nil {
 		return nil, err
 	}
-	c.Put(key, gdbc)
+	// Only non-transaction connection is cached
+	if !dsc.Tx {
+		c.Put(key, gdbc)
+	}
 	return gdbc, nil
 
 }
